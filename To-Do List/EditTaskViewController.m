@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *prioritySegment;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UILabel *dateCreated;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *statusSegment;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property TaskModel *task;
@@ -53,6 +54,8 @@
         _statusSegment.selectedSegmentIndex = [[taskArray objectAtIndex:rowSelected] taskStatus]-1;
     }else if(_comingFrom ==2){
         _statusSegment.hidden = YES;
+        _statusLabel.hidden = YES;
+        _editBtn.hidden = YES;
     }else{
         _statusSegment.selectedSegmentIndex = [[taskArray objectAtIndex:rowSelected] taskStatus];
     }

@@ -121,9 +121,9 @@ else{
 
 
     UNMutableNotificationContent *objNotificationContent = [[UNMutableNotificationContent alloc] init];
-    objNotificationContent.title = [NSString localizedUserNotificationStringForKey:@"Notification!" arguments:nil];
-    objNotificationContent.body = [NSString localizedUserNotificationStringForKey:@"This is local notification message!"
-                                                                        arguments:nil];
+    objNotificationContent.title = [NSString localizedUserNotificationStringForKey:@"Todo List Reminder" arguments:nil];
+    NSString *textoutput = [NSString stringWithFormat:@"Reminder for Task: %@", _nameTxt.text];
+    objNotificationContent.body = [NSString localizedUserNotificationStringForKey:textoutput arguments:nil];
     objNotificationContent.sound = [UNNotificationSound defaultSound];
 
     /// 4. update application icon badge number

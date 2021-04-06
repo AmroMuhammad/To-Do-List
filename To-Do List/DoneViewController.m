@@ -17,6 +17,7 @@
 }
 @property NSUserDefaults *userDefault;
 @property NSMutableArray<TaskModel*> *taskArray;
+@property NSMutableArray<TaskModel*> *originalTasks;
 @property Boolean isSorted;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -83,8 +84,8 @@
     if([[[_userDefault dictionaryRepresentation] allKeys] containsObject:@"todoArray"]){
         [_taskArray removeAllObjects];
         NSData *data = [_userDefault objectForKey:@"todoArray"];
-        NSMutableArray *temp = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        for(TaskModel *t in temp){
+        _originalTasks = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        for(TaskModel *t in _originalTasks){
             if([t taskStatus]==2){
                 [_taskArray addObject:t];
             }
@@ -169,6 +170,56 @@
             cellImage.image = [UIImage imageNamed:@"low.png"];
             break;
         }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        if(_isSorted){
+            switch (indexPath.section) {
+                case 0:
+                    [self deleteFromArray:highArray row:(int)indexPath.row];
+                    break;
+                case 1:
+                    [self deleteFromArray:medArray row:(int)indexPath.row];
+                    break;
+                case 2:
+                    [self deleteFromArray:lowArray row:(int)indexPath.row];
+                    break;
+            }
+        }else{
+            TaskModel *model = [_taskArray objectAtIndex:indexPath.row];
+            for(int i=0;i<_originalTasks.count;i++){
+                if([[[_originalTasks objectAtIndex:i] dateOfCreation] isEqualToString:[model dateOfCreation]] ){
+                    [_originalTasks removeObjectAtIndex:i];
+                    break;
+                }
+            }
+            [_taskArray removeObjectAtIndex:indexPath.row];
+        }
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:_originalTasks];
+        [_userDefault setObject:data forKey:@"todoArray"];
+        [_userDefault synchronize];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
+}
+
+-(void)deleteFromArray:(NSMutableArray*)arr row:(int)row{
+    TaskModel *model = [arr objectAtIndex:row];
+    for(int i=0;i<_taskArray.count;i++){
+        if([[[_taskArray objectAtIndex:i] dateOfCreation] isEqualToString:[model dateOfCreation]] ){
+            [_taskArray removeObjectAtIndex:i];
+            [arr removeObjectAtIndex:row];
+            break;
+        }
+    }
+    for(int i=0;i<_originalTasks.count;i++){
+        if([[[_originalTasks objectAtIndex:i] dateOfCreation] isEqualToString:[model dateOfCreation]] ){
+            [_originalTasks removeObjectAtIndex:i];
+            break;
+        }
+    }
 }
 
 @end

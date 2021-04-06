@@ -15,6 +15,7 @@
 @property NSUserDefaults *userDefault;
 @property NSMutableArray<TaskModel*> *taskArray;
 @property NSMutableArray<TaskModel*> *tasksFiltered;
+@property NSMutableArray<TaskModel*> *originalTasks;
 @property Boolean isFiltered;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -77,7 +78,6 @@
     return cell;
 }
 - (IBAction)addClicked:(id)sender {
-    printf("add button clicked");
     AddTaskViewController *addView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddTaskViewController"];
     [self.navigationController pushViewController:addView animated:YES];
 }
@@ -86,8 +86,8 @@
     if([[[_userDefault dictionaryRepresentation] allKeys] containsObject:@"todoArray"]){
         [_taskArray removeAllObjects];
         NSData *data = [_userDefault objectForKey:@"todoArray"];
-        NSMutableArray *temp = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        for(TaskModel *t in temp){
+        _originalTasks = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        for(TaskModel *t in _originalTasks){
             if([t taskStatus]==0){
                 [_taskArray addObject:t];
             }
@@ -142,5 +142,44 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        if(_isFiltered){
+            [self deleteFromTableWithVisibleArray:indexPath.row];
+        }else{
+            TaskModel *model = [_taskArray objectAtIndex:indexPath.row];
+            for(int i=0;i<_originalTasks.count;i++){
+                if([[[_originalTasks objectAtIndex:i] dateOfCreation] isEqualToString:[model dateOfCreation]] ){
+                    [_originalTasks removeObjectAtIndex:i];
+                    break;
+                }
+            }
+            [_taskArray removeObjectAtIndex:indexPath.row];
+        }
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:_originalTasks];
+        [_userDefault setObject:data forKey:@"todoArray"];
+        [_userDefault synchronize];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
+}
+
+-(void) deleteFromTableWithVisibleArray:(int)row{
+    TaskModel *model = [_tasksFiltered objectAtIndex:row];
+    for(int i=0;i<_taskArray.count;i++){
+        if([[[_taskArray objectAtIndex:i] dateOfCreation] isEqualToString:[model dateOfCreation]] ){
+            [_taskArray removeObjectAtIndex:i];
+            [_tasksFiltered removeObjectAtIndex:row];
+            break;
+        }
+    }
+    for(int i=0;i<_originalTasks.count;i++){
+        if([[[_originalTasks objectAtIndex:i] dateOfCreation] isEqualToString:[model dateOfCreation]] ){
+            [_originalTasks removeObjectAtIndex:i];
+            break;
+        }
+    }
+}
 
 @end

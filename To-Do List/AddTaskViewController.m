@@ -24,9 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-//    _taskArray = [NSMutableArray new];
-    NSLog(@"%@", [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys]);
     _task = [TaskModel new];
     _userDefault = [NSUserDefaults standardUserDefaults];
     if([[[_userDefault dictionaryRepresentation] allKeys] containsObject:@"todoArray"]){
@@ -37,7 +34,6 @@
 
     }else{
         taskArray = [NSMutableArray new];
-        printf("llllllllll");
     }
     
 

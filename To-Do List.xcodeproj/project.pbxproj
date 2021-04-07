@@ -18,10 +18,8 @@
 		C2265A59261B89AE0020AFC2 /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2265A58261B89AE0020AFC2 /* AddTaskViewController.m */; };
 		C2265A5C261B97740020AFC2 /* TaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C2265A5B261B97740020AFC2 /* TaskModel.m */; };
 		C2265A5F261B9F670020AFC2 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2265A5E261B9F670020AFC2 /* UserNotifications.framework */; };
-		C2265A6E261BE2D00020AFC2 /* med.png in Resources */ = {isa = PBXBuildFile; fileRef = C2265A6B261BE2CF0020AFC2 /* med.png */; };
-		C2265A6F261BE2D00020AFC2 /* high.png in Resources */ = {isa = PBXBuildFile; fileRef = C2265A6C261BE2D00020AFC2 /* high.png */; };
-		C2265A70261BE2D00020AFC2 /* low.png in Resources */ = {isa = PBXBuildFile; fileRef = C2265A6D261BE2D00020AFC2 /* low.png */; };
 		C2265A73261BEB630020AFC2 /* EditTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2265A72261BEB630020AFC2 /* EditTaskViewController.m */; };
+		C24FF4D5261E461600226117 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C24FF4D4261E461600226117 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,11 +44,9 @@
 		C2265A5B261B97740020AFC2 /* TaskModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskModel.m; sourceTree = "<group>"; };
 		C2265A5E261B9F670020AFC2 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		C2265A60261BB5F50020AFC2 /* MyProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyProtocol.h; sourceTree = "<group>"; };
-		C2265A6B261BE2CF0020AFC2 /* med.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = med.png; path = "../../../../../../Volumes/VMware Shared Folders/myFolderAmr/med.png"; sourceTree = "<group>"; };
-		C2265A6C261BE2D00020AFC2 /* high.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = high.png; path = "../../../../../../Volumes/VMware Shared Folders/myFolderAmr/high.png"; sourceTree = "<group>"; };
-		C2265A6D261BE2D00020AFC2 /* low.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = low.png; path = "../../../../../../Volumes/VMware Shared Folders/myFolderAmr/low.png"; sourceTree = "<group>"; };
 		C2265A71261BEB630020AFC2 /* EditTaskViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditTaskViewController.h; sourceTree = "<group>"; };
 		C2265A72261BEB630020AFC2 /* EditTaskViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditTaskViewController.m; sourceTree = "<group>"; };
+		C24FF4D4261E461600226117 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +81,6 @@
 		C2265A34261B7FE90020AFC2 /* To-Do List */ = {
 			isa = PBXGroup;
 			children = (
-				C2265A6C261BE2D00020AFC2 /* high.png */,
-				C2265A6D261BE2D00020AFC2 /* low.png */,
-				C2265A6B261BE2CF0020AFC2 /* med.png */,
 				C2265A35261B7FE90020AFC2 /* AppDelegate.h */,
 				C2265A36261B7FE90020AFC2 /* AppDelegate.m */,
 				C2265A38261B7FE90020AFC2 /* SceneDelegate.h */,
@@ -102,6 +95,7 @@
 				C2265A52261B869A0020AFC2 /* InprogressViewController.m */,
 				C2265A54261B86A60020AFC2 /* DoneViewController.h */,
 				C2265A55261B86A60020AFC2 /* DoneViewController.m */,
+				C24FF4D4261E461600226117 /* Assets.xcassets */,
 				C2265A57261B89AE0020AFC2 /* AddTaskViewController.h */,
 				C2265A58261B89AE0020AFC2 /* AddTaskViewController.m */,
 				C2265A5A261B97740020AFC2 /* TaskModel.h */,
@@ -178,11 +172,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2265A6E261BE2D00020AFC2 /* med.png in Resources */,
 				C2265A45261B7FEB0020AFC2 /* LaunchScreen.storyboard in Resources */,
 				C2265A40261B7FE90020AFC2 /* Main.storyboard in Resources */,
-				C2265A70261BE2D00020AFC2 /* low.png in Resources */,
-				C2265A6F261BE2D00020AFC2 /* high.png in Resources */,
+				C24FF4D5261E461600226117 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
